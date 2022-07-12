@@ -23,7 +23,7 @@ async function run() {
 		const database = client.db("restCountries");
 		const countries = database.collection("countries");
 
-		app.get("/", async (req, res) => {
+		app.get("/countries", async (req, res) => {
 			const query = {};
 			const cursor = countries.find(query);
 			const restCountries = await cursor.toArray();
@@ -32,7 +32,9 @@ async function run() {
 	} finally {
 	}
 }
-
+app.get("/", (req, res) => {
+	res.send("Hello from server");
+});
 run().catch(console.dir);
 
 app.listen(port, () => {
